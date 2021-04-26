@@ -27,13 +27,10 @@ func TrailingWhitespace(lines []string, lint bool) []string {
 	for index, line := range lines {
 		newline := strings.TrimRight(line, " ")
 
-		if line != newline && lint {
+		if lint && line != newline { 
 			offendingLines = append(offendingLines, fmt.Sprintf("line %v, issue = Trailing whitespace", index))
-		} else if line != newline && !lint {
-			newLines = append(newLines, newline)
-		} else {
-			newLines = append(newLines, line)
 		}
+		newLines = append(newLines, newline)
 	}
 
 	if lint {
